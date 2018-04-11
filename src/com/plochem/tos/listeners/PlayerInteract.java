@@ -32,6 +32,7 @@ public class PlayerInteract implements Listener{
 					}
 				}
 			}
+			
 		}
 
 		//TODO find the corresposnding gameplayer ject, get that player's items. check what item is it. open whatever it needs

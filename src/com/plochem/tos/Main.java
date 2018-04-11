@@ -54,7 +54,7 @@ public class Main extends JavaPlugin{
 	}
 
 	public void onDisable() {
-	
+
 	}
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
 		Player p = (Player) sender;
@@ -100,12 +100,17 @@ public class Main extends JavaPlugin{
 					saveConfig();
 				}
 				if(args[0].equalsIgnoreCase("leave")){ //TODO: able to leave arena
-					for(Arena arena : listOfArenas){
-						for(GamePlayer gp : arena.getPlayers()){
-							if(gp.getPlayer().equals(p)){
-								//TODO: make to method
-							}
+					GamePlayer temp = getGamePlayer(p);
+					if(temp == null){ //not in a game
+						p.sendMessage(PREFIX + "§cYou are currently not in a game!");
+					} else {
+						temp.leaveGame();
+						if(temp.getArena().getHasStarted()){ //TODO: add player to dead list 
+
+						} else {
+							temp.getArena().sendMessage(p.getName() + " §ehas left the game!");
 						}
+						p.sendMessage(PREFIX + "§cYou have left the game!");
 					}
 				}
 			} else if(args.length == 2){
@@ -227,7 +232,7 @@ public class Main extends JavaPlugin{
 			listOfArenas.add(new Arena(world, mapName, spawnpoints));
 		}
 	}
-	
+
 	private Location[] getLocsFromFile(String mapName, String worldName){
 		Location[] spawnpoints = new Location[15];
 		Set<String> locNums = arenaData.getConfigurationSection("Arenas." + mapName + ".Spawnpoints").getKeys(false); // the spawnpoint numbers 1-15
@@ -237,7 +242,7 @@ public class Main extends JavaPlugin{
 		}
 		return spawnpoints;
 	}
-	
+
 	public void saveConfig(){
 		try{
 			arenaData.save(arenaFile);
@@ -255,7 +260,7 @@ public class Main extends JavaPlugin{
 		}
 		return false;
 	}
-	
+
 	private Arena getArena(String arenaName){
 		for(Arena arena : listOfArenas){
 			if(arena.getName().equals(arenaName)){
@@ -286,7 +291,7 @@ public class Main extends JavaPlugin{
 			p.sendMessage(PREFIX + "§cThis arena is currently full! Please join another one.");
 		}
 	}
-	
+
 	public GamePlayer getGamePlayer(Player p){
 		for(Arena arena : plugin.listOfArenas){
 			for(GamePlayer gp : arena.getAlivePlayers()){

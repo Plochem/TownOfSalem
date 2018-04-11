@@ -71,4 +71,10 @@ public class GamePlayer{
 		return gameItems;
 	}
 	
+	public void leaveGame(){
+		arena.getPlayers().remove(this);
+		if(arena.getAlivePlayers().contains(this)) arena.getAlivePlayers().remove(this);
+		if(arena.getDeadPlayers().contains(this)) arena.getDeadPlayers().remove(this);
+	}
+	
 }
