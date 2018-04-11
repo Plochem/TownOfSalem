@@ -22,7 +22,7 @@ public class Arena {
 	boolean hasStarted;
 
 	Countdown cd;
-	
+
 	public Arena(World world, String name, Location[] spawnpoints) {
 		this.world = world;
 		this.name = name;
@@ -31,56 +31,48 @@ public class Arena {
 		}
 
 	}
-	
+
 	public List<GamePlayer> getPlayers() {
 		return players;
 	}
-
 
 	public void addPlayer(GamePlayer gp) {
 		players.add(gp);
 		alivePlayers.add(gp);
 	}
 
-
 	public List<GamePlayer> getDeadPlayers() {
 		return deadPlayers;
 	}
 
-
 	public void addDeadPlayer(GamePlayer gp) {
 		deadPlayers.add(gp);
 	}
-	
+
 	public List<GamePlayer> getAlivePlayers() {
 		return alivePlayers;
 	}
-
 
 	public void addAlivePlayer(GamePlayer gp) {
 		alivePlayers.add(gp);
 	}
 
-
 	public World getWorld() {
 		return world;
 	}
-
 
 	public void setWorld(World world) {
 		this.world = world;
 	}
 
-
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public boolean getHasStarted() {
 		return hasStarted;
 	}
@@ -88,7 +80,7 @@ public class Arena {
 	public void setHasStarted(boolean hasStarted) {
 		this.hasStarted = hasStarted;
 	}
-	
+
 	public Location[] getSpawnpoints() {
 		return spawnpoints;
 	}
@@ -96,7 +88,7 @@ public class Arena {
 	public void addSpawnpoint(Location loc, int pos) {
 		spawnpoints[pos-1] = loc;
 	}
-	
+
 	public void sendMessage(String message){
 		for(Player p : world.getPlayers()){
 			p.sendMessage(message);
@@ -117,16 +109,16 @@ public class Arena {
 		}
 		return true;
 	}
-	
+
 	public void startGame() {
 		Game game = new Game(this, plugin);
 		game.assignRoles();
 	}
 
-	
-//	public static void removeScoreBoard(Player p) {
-//		objective.unregister();
-//		p.setScoreboard(manager.getNewScoreboard());
-//	}
-	
+
+	//	public static void removeScoreBoard(Player p) {
+	//		objective.unregister();
+	//		p.setScoreboard(manager.getNewScoreboard());
+	//	}
+
 }
