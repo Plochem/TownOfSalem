@@ -114,6 +114,10 @@ public class Arena {
 		Game game = new Game(this, plugin);
 		game.assignRoles();
 	}
+	
+	public Countdown getCountdown(){
+		return cd;
+	}
 
 
 	//	public static void removeScoreBoard(Player p) {

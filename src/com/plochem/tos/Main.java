@@ -104,8 +104,16 @@ public class Main extends JavaPlugin{
 					if(temp == null){ //not in a game
 						p.sendMessage(PREFIX + "§cYou are currently not in a game!");
 					} else {
-						temp.leaveGame();
-						if(temp.getArena().getHasStarted()){ //TODO: add player to dead list 
+						temp.leaveGame(); //removes from arena's arraylists
+						if(temp.getArena().getHasStarted()){ // either in the game or countdown before assigning roles
+							System.out.println(temp.getArena().getCountdown().getType());
+							if(temp.getArena().getCountdown().getType().equals("A")){ //if the countdown is the starting timer
+								temp.getArena().getCountdown().stopGameTimer();
+								temp.getArena().setHasStarted(false);
+								temp.getArena().sendMessage(p.getName() + " §ehas left the game! Resetting countdown...");
+							} else{//player left mid game//TODO: add player to dead list 
+								
+							}
 
 						} else {
 							temp.getArena().sendMessage(p.getName() + " §ehas left the game!");

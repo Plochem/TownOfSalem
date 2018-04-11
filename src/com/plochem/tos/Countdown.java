@@ -9,12 +9,14 @@ import com.plochem.tos.game.Game;
 public class Countdown {
 	int time;
 	int countdown;
+	String type;
 
 	public Countdown(int duration){
 		time = duration;
 	}
 	
 	public void doCountdown(Plugin plugin, Arena arena){ // does countdown before game starts
+		type = "A";
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -22,7 +24,8 @@ public class Countdown {
 				if(time == 0) {
 					arena.sendMessage("§eThe game has begun! Assigning roles!");
 					Bukkit.getScheduler().cancelTask(countdown); // stops countdown
-					arena.startGame();
+					arena.startGame();		
+					type = "B";
 					return;
 				}
 				if(time!=1){
@@ -36,6 +39,7 @@ public class Countdown {
 	}
 	
 	public void start(Plugin plugin, Game game){ //for all cycles in events during game
+
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -49,5 +53,13 @@ public class Countdown {
 				time--;
 			}
 		}, 0L, 20L);
+	}
+	
+	public String getType(){
+		return type;
+	}
+
+	public void stopGameTimer() {
+		Bukkit.getScheduler().cancelTask(countdown); // stops countdown
 	}
 }
