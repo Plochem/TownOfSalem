@@ -1,0 +1,8 @@
+main: com.plochem.tos.Main
+name: TownOfSalem
+version: 1.0
+author: Plochem
+description: Custom Town of Salem Plugin by Plochem
+commands:
+   tos:
+   townofsalem:
