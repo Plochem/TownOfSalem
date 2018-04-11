@@ -119,6 +119,7 @@ public class Main extends JavaPlugin{
 							temp.getArena().sendMessage(p.getName() + " §ehas left the game!");
 						}
 						p.sendMessage(PREFIX + "§cYou have left the game!");
+						p.getInventory().clear();
 					}
 				}
 			} else if(args.length == 2){
