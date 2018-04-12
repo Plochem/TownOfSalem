@@ -15,7 +15,7 @@ public class GamePlayer{
 	private Role role;
 	private Arena arena;
 	private boolean hasJoined = false;
-	List<GameItem> gameItems = new ArrayList<>();
+	private List<GameItem> gameItems = new ArrayList<>();
 	
 	public GamePlayer(Player player, Arena arena) {
 		this.player = player;
