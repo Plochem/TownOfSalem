@@ -19,20 +19,31 @@ public class InventoryClick implements Listener{
 	public void onInvClick(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
 		GamePlayer gp = plugin.getGamePlayer(p);//TODO prevent taking items out
-		if(gp == null){ //not in the game
-			//shop
-			//e.setCancelled(false);	if click shop
-		} else { //in the game
-			//TODO check if player is in the game like roles already assigned
-			e.setCancelled(true);
-			String selectedPlayerName = e.getCurrentItem().getItemMeta().getDisplayName();
-			for(GameItem items : gp.getItems()){
-				if(items.getGUI().equals(e.getClickedInventory())){
-					p.sendMessage(items.getOnClickMsg() + selectedPlayerName);
-					break;
+		if(e.getCurrentItem() != null){
+			if(gp == null){ //not in the game
+				//shop
+				//e.setCancelled(false);	if click shop
+			} else { //in the game
+				//TODO check if player is in the game like roles already assigned
+				e.setCancelled(true);
+				String selectedPlayerName = e.getCurrentItem().getItemMeta().getDisplayName();
+				for(GameItem items : gp.getItems()){
+					if(items.getGUI().equals(e.getClickedInventory())){ //check if player is clicking in the GUI designated for its role
+						if(gp.getArena().getGame().getEvent().equals("Night")){ 
+							p.sendMessage(items.getOnClickMsg() + selectedPlayerName + ".");
+							gp.getRole().performAbility(selectedPlayerName, gp.getArena().getGame());
+							items.getGUI().getViewers().get(0).closeInventory();
+							break;
+						} else {
+							p.sendMessage("§cYou are not allowed to do this right now!");
+							items.getGUI().getViewers().get(0).closeInventory();
+						}
+
+					}
 				}
 			}
 		}
+		
 	}
 }
 

@@ -1,5 +1,6 @@
 package com.plochem.tos.roles;
 
+import com.plochem.tos.game.Game;
 import com.plochem.tos.game.GamePlayer;
 
 public class Role{
@@ -134,9 +135,12 @@ public class Role{
 		this.canPerformNightAbility = canPerformNightAbility;
 	}
 
-	public void performAbility(GamePlayer gp) {
-		gp.getPlayer().sendMessage("§cRole ability went to wrong method! (Role.java:138) (Game.java:70)"); //helps me to fix errors if any
-		
+	public void performAbility(String playerName, Game game) {
+
+	}
+
+	public void giveItems(GamePlayer gp) {
+
 	}
 	
 	

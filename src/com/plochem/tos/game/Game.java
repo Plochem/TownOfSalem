@@ -27,6 +27,10 @@ public class Game {
 	List<Role> copyOfRoles;
 	String event;
 	Countdown cd;
+	List<Death> recentDeaths = new ArrayList<>();
+	
+	String mafiaKill;
+	
 	public Game(Arena arena, Plugin plugin){
 		this.arena = arena;
 		this.plugin = plugin;
@@ -37,11 +41,14 @@ public class Game {
 	public String getEvent(){
 		return event;
 	}
+	public void addNewDeath(Death death){//TODO change to add new recent death to list. 
+		recentDeaths.add(death);
+	}
 	public void nextEvent(){
 		if(event.equals("Day")){
 			night();
 		} else if(event.equals("Night")){
-			//TODO 
+			goThroughDeaths();
 		}
 	}
 	public void assignRoles(){
@@ -67,12 +74,22 @@ public class Game {
 		event = "Night";
 		for(GamePlayer gp : arena.getAlivePlayers()){
 			if(gp.getRole().canPerformNightAbility()){
-				gp.getRole().performAbility(gp);
+				gp.getRole().giveItems(gp);
 				System.out.println(gp.getPlayer().getName() + ": " + gp.getRole().getName());
 			}
 		}
 		cd = new Countdown(30);
 		cd.start(plugin, this);
+	}
+	
+	private void goThroughDeaths(){//TODO make a countdown for each death (5sec or more?) go through "recentDeaths" arrayList
+		//TODO kill the people first and show title to the dead "YOU DIED!" <-&c color maybe bold? . add to deadPlayers arraylist. update playerlist (the book)
+		//TODO clear inventory
+		arena.getWorld().setTime(6000);
+		event = "Discussion";
+		displayBoard(45);
+		cd = new Countdown(10);
+		cd.showDeaths(plugin, this, recentDeaths, 0);
 	}
 	
 //	private Role pickRandom() {

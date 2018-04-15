@@ -14,13 +14,13 @@ import com.plochem.tos.game.GamePlayer;
 public class Arena {
 	Plugin plugin;
 	List<GamePlayer> alivePlayers = new ArrayList<>(); // only alive
-	List<GamePlayer> players = new ArrayList<GamePlayer>(); //only all
-	List<GamePlayer> deadPlayers = new ArrayList<GamePlayer>(); //only dead
+	List<GamePlayer> players = new ArrayList<GamePlayer>(); //only all.  helps build the player list
+	List<GamePlayer> deadPlayers = new ArrayList<GamePlayer>(); //only dead. helps build the player list
 	Location[] spawnpoints = new Location[15];
 	World world;
 	String name;
 	boolean hasStarted;
-
+	Game game;
 	Countdown cd;
 
 	public Arena(World world, String name, Location[] spawnpoints) {
@@ -88,6 +88,14 @@ public class Arena {
 	public void addSpawnpoint(Location loc, int pos) {
 		spawnpoints[pos-1] = loc;
 	}
+	
+	public Countdown getCountdown(){
+		return cd;
+	}
+	
+	public Game getGame(){
+		return game;
+	}
 
 	public void sendMessage(String message){
 		for(Player p : world.getPlayers()){
@@ -111,13 +119,10 @@ public class Arena {
 	}
 
 	public void startGame() {
-		Game game = new Game(this, plugin);
+		game = new Game(this, plugin);
 		game.assignRoles();
 	}
 	
-	public Countdown getCountdown(){
-		return cd;
-	}
 
 
 	//	public static void removeScoreBoard(Player p) {

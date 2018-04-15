@@ -1,9 +1,12 @@
 package com.plochem.tos;
 
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import com.plochem.tos.game.Death;
 import com.plochem.tos.game.Game;
 
 public class Countdown {
@@ -39,7 +42,6 @@ public class Countdown {
 	}
 	
 	public void start(Plugin plugin, Game game){ //for all cycles in events during game
-
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -55,6 +57,24 @@ public class Countdown {
 		}, 0L, 20L);
 	}
 	
+	public void showDeaths(Plugin plugin, Game game, List<Death> recentDeaths, int index){
+		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
+		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
+			@Override
+			public void run() {
+				Death curr = recentDeaths.get(index);
+				game.getArena().sendMessage(curr.getPlayerKilled() + " was founded dead last night.");
+				//TODO finish the showing deaths
+				if(time == 0){
+					int i = index;
+					Bukkit.getScheduler().cancelTask(countdown);
+					showDeaths(plugin, game, recentDeaths, i++);
+				}
+				time--;
+			}
+		}, 0L, 20L);
+	}
+	
 	public String getType(){
 		return type;
 	}
@@ -62,4 +82,5 @@ public class Countdown {
 	public void stopGameTimer() {
 		Bukkit.getScheduler().cancelTask(countdown); // stops countdown
 	}
+
 }
