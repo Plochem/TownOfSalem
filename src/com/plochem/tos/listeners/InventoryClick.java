@@ -27,9 +27,12 @@ public class InventoryClick implements Listener{
 				//TODO check if player is in the game like roles already assigned
 				e.setCancelled(true);
 				String selectedPlayerName = e.getCurrentItem().getItemMeta().getDisplayName();
+				if(selectedPlayerName.equals(p.getName())){ //TODO allow to click itself if doctor or vig/vet (whichever has the alerts)
+					p.sendMessage("§cYou cannot do that to yourself!");
+				}
 				for(GameItem items : gp.getItems()){
 					if(items.getGUI().equals(e.getClickedInventory())){ //check if player is clicking in the GUI designated for its role
-						if(gp.getArena().getGame().getEvent().equals("Night")){ 
+						if(gp.getArena().getGame().getEvent().equals("Night")){  //TODO allow for jailors to do their choosing
 							p.sendMessage(items.getOnClickMsg() + selectedPlayerName + ".");
 							gp.getRole().performAbility(selectedPlayerName, gp.getArena().getGame());
 							items.getGUI().getViewers().get(0).closeInventory();

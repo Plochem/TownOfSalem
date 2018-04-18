@@ -29,7 +29,6 @@ public class Arena {
 		if (spawnpoints != null) {
 			this.spawnpoints = spawnpoints;
 		}
-
 	}
 
 	public List<GamePlayer> getPlayers() {
@@ -55,6 +54,10 @@ public class Arena {
 
 	public void addAlivePlayer(GamePlayer gp) {
 		alivePlayers.add(gp);
+	}
+	
+	public void removeAlivePlayer(GamePlayer gp){
+		alivePlayers.remove(gp);
 	}
 
 	public World getWorld() {

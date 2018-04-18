@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -49,6 +50,10 @@ public class Game {
 			night();
 		} else if(event.equals("Night")){
 			goThroughDeaths();
+		} else if(event.equals("Transition")){
+			discussion();
+		} else if(event.equals("Discussion")){
+			//voting
 		}
 	}
 	public void assignRoles(){
@@ -82,14 +87,34 @@ public class Game {
 		cd.start(plugin, this);
 	}
 	
-	private void goThroughDeaths(){//TODO make a countdown for each death (5sec or more?) go through "recentDeaths" arrayList
-		//TODO kill the people first and show title to the dead "YOU DIED!" <-&c color maybe bold? . add to deadPlayers arraylist. update playerlist (the book)
-		//TODO clear inventory
+	@SuppressWarnings("deprecation")
+	private void goThroughDeaths(){
+		//TODO update playerlist (the book)
+		for(GamePlayer gp : arena.getAlivePlayers()){ //clear inventory
+			gp.getPlayer().getInventory().clear();
+			gp.getItems().clear();
+		}
+		arena.getWorld().setTime(6000);
+		event = "Transition";
+		displayBoard(0);
+		for(Death death : recentDeaths){
+			Player killed = Bukkit.getPlayer(death.getPlayerKilled());
+			if(killed != null){
+				killed.sendTitle("§cYou Died!", "");	
+			}
+			GamePlayer target = getGamePlayer(killed);
+			arena.removeAlivePlayer(target);
+			arena.addDeadPlayer(target);
+		}
+		cd = new Countdown(18);
+		cd.showDeaths(plugin, this, recentDeaths, 0);
+	}
+	
+	private void discussion(){
 		arena.getWorld().setTime(6000);
 		event = "Discussion";
-		displayBoard(45);
-		cd = new Countdown(10);
-		cd.showDeaths(plugin, this, recentDeaths, 0);
+		cd = new Countdown(45);
+		cd.start(plugin, this);
 	}
 	
 //	private Role pickRandom() {
@@ -117,5 +142,14 @@ public class Game {
 			//TODO:display goals
 			gp.getPlayer().setScoreboard(roleBoard);
 		}
+	}
+	
+	private GamePlayer getGamePlayer(Player killed){
+		for(GamePlayer gp : arena.getAlivePlayers()){
+			if(gp.getPlayer().equals(killed)){
+				return gp;
+			}
+		}
+		return null;
 	}
 }

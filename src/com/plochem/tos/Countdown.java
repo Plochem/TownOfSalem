@@ -8,6 +8,8 @@ import org.bukkit.scheduler.BukkitScheduler;
 
 import com.plochem.tos.game.Death;
 import com.plochem.tos.game.Game;
+import com.plochem.tos.roles.mafia.Godfather;
+import com.plochem.tos.roles.mafia.Mafiaso;
 
 public class Countdown {
 	int time;
@@ -50,25 +52,51 @@ public class Countdown {
 				if(time == 0){
 					Bukkit.getScheduler().cancelTask(countdown);
 					game.nextEvent();
-					//TODO: check what event to go to. eg: if day/discussion, go to night. if night, go to day, etc..
 				}
 				time--;
 			}
 		}, 0L, 20L);
 	}
-	
+	/**
+	 * 
+	 * @param plugin - the current plugin
+	 * @param game - the current game
+	 * @param recentDeaths - the deaths to loop through
+	 * @param index - the index to get in the recentDeaths list
+	 */
 	public void showDeaths(Plugin plugin, Game game, List<Death> recentDeaths, int index){
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
 			public void run() {
 				Death curr = recentDeaths.get(index);
-				game.getArena().sendMessage(curr.getPlayerKilled() + " was founded dead last night.");
+				if(time == 18){
+					game.getArena().sendMessage(curr.getPlayerKilled() + " was found dead last night.");
+				}
+				if(time == 14){
+					if(curr.getKiller() instanceof Mafiaso || curr.getKiller() instanceof Godfather){
+						game.getArena().sendMessage("He was stabbed by a Mafia member.");
+					}
+					if(curr.getKiller() == null){ // the player left the game
+						game.getArena().sendMessage("He apparently committed suicide");
+					}
+				}
+				if(time == 10){//TODO death notes & will
+					game.getArena().sendMessage("display will here");
+				}
+				if(time == 5){
+					game.getArena().sendMessage("display death note");
+				}
 				//TODO finish the showing deaths
 				if(time == 0){
 					int i = index;
+					i++;
 					Bukkit.getScheduler().cancelTask(countdown);
-					showDeaths(plugin, game, recentDeaths, i++);
+					if(i < recentDeaths.size() - 1){
+						showDeaths(plugin, game, recentDeaths, i);
+					} else {
+						game.nextEvent();
+					}
 				}
 				time--;
 			}
