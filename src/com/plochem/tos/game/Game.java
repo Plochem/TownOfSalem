@@ -53,7 +53,7 @@ public class Game {
 		} else if(event.equals("Transition")){
 			discussion();
 		} else if(event.equals("Discussion")){
-			//voting
+			vote();
 		}
 	}
 	public void assignRoles(){
@@ -111,9 +111,16 @@ public class Game {
 	}
 	
 	private void discussion(){
+		recentDeaths.clear();
 		arena.getWorld().setTime(6000);
 		event = "Discussion";
 		cd = new Countdown(45);
+		cd.start(plugin, this);
+	}
+	
+	private void vote(){ //TODO add voting things
+		event = "Voting";
+		cd = new Countdown(30);
 		cd.start(plugin, this);
 	}
 	
@@ -127,7 +134,7 @@ public class Game {
 //	}
 
 	public void displayBoard(int time){
-		for(GamePlayer gp : arena.getAlivePlayers()){
+		for(GamePlayer gp : arena.getPlayers()){
 			DateFormat df = new SimpleDateFormat("MM/dd/yy");
 			Scoreboard roleBoard =  Bukkit.getScoreboardManager().getNewScoreboard();
 			Objective objective = roleBoard.registerNewObjective("Role", "dummy");
