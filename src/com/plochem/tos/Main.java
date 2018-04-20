@@ -36,18 +36,18 @@ public class Main extends JavaPlugin{
 	}
 	public void onEnable() {
 		plugin = this;
-		Bukkit.getServer().getLogger().info("[TownofSalem] Starting Up...");
+		Bukkit.getServer().getLogger().info("[TownOfSalem] Starting Up...");
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerDataFile(), plugin);
 		Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(this), plugin);
 		Bukkit.getServer().getPluginManager().registerEvents(new InventoryClick(this), plugin);
 		arenaFile = new File("plugins/TownOfSalem/arenas.yml");
 		arenaData = YamlConfiguration.loadConfiguration(arenaFile);
 		if(!(arenaFile.exists())) {
-			Bukkit.getServer().getLogger().info("[TownofSalem] Creating arena storage file!");
+			Bukkit.getServer().getLogger().info("[TownOfSalem] Creating arena storage file!");
 			arenaData.createSection("Arenas");
 			saveConfig();
 		}  else {
-			Bukkit.getServer().getLogger().info("[TownofSalem] Arena storage file already exists! Skipping creation...");
+			Bukkit.getServer().getLogger().info("[TownOfSalem] Arena storage file already exists! Skipping creation...");
 		}
 		arenaList = arenaData.getConfigurationSection("Arenas").getKeys(false); // gets all arena names in file
 		loadArenaFromFileToObj(arenaList); // transfers data from arenas.yml to objects for convenience
@@ -238,6 +238,7 @@ public class Main extends JavaPlugin{
 			String worldName = arenaData.getString("Arenas." + mapName + ".world");
 			Location[] spawnpoints = getLocsFromFile(mapName, worldName);
 			World world = Bukkit.getServer().getWorld(worldName);
+			Bukkit.getServer().getLogger().info("[TownOfSalem] Loading " + mapName + " from file.");
 			listOfArenas.add(new Arena(world, mapName, spawnpoints));
 		}
 	}
@@ -257,7 +258,7 @@ public class Main extends JavaPlugin{
 			arenaData.save(arenaFile);
 		} catch(Exception e){ 
 			e.printStackTrace();
-			Bukkit.getServer().getConsoleSender().sendMessage("[TownofSalem] §c[Error] Arena.yml failed to be saved!");
+			Bukkit.getServer().getConsoleSender().sendMessage("[TownOfSalem] §c[Error] Arena.yml failed to be saved!");
 		}
 	}
 
