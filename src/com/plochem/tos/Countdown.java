@@ -20,6 +20,12 @@ public class Countdown {
 		time = duration;
 	}
 	
+	/** Countdown for the game to start
+	 * 
+	 * @param plugin - the current plugin
+	 * @param arena - the current arena
+	 * 
+	 */
 	public void doCountdown(Plugin plugin, Arena arena){ // does countdown before game starts
 		type = "A";
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
@@ -43,6 +49,12 @@ public class Countdown {
 		}, 0L, 20L);
 	}
 	
+	/** A countdown for each phase of the game
+	 * 
+	 * @param plugin - the current plugin
+	 * @param game - the current game
+	 * 
+	 */
 	public void start(Plugin plugin, Game game){ //for all cycles in events during game
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
@@ -57,7 +69,7 @@ public class Countdown {
 			}
 		}, 0L, 20L);
 	}
-	/**
+	/** A countdown to go through each death from the previous night
 	 * 
 	 * @param plugin - the current plugin
 	 * @param game - the current game
@@ -65,6 +77,9 @@ public class Countdown {
 	 * @param index - the index to get in the recentDeaths list
 	 */
 	public void showDeaths(Plugin plugin, Game game, List<Death> recentDeaths, int index){
+		if(recentDeaths.isEmpty()){
+			game.nextEvent();
+		}
 		BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
 		 countdown = scheduler.scheduleSyncRepeatingTask(plugin, new Runnable() {
 			@Override
@@ -87,12 +102,12 @@ public class Countdown {
 				if(time == 5){
 					game.getArena().sendMessage("display death note");
 				}
-				//TODO finish the showing deaths
 				if(time == 0){
 					int i = index;
 					i++;
 					Bukkit.getScheduler().cancelTask(countdown);
 					if(i < recentDeaths.size() - 1){
+						time = 19;
 						showDeaths(plugin, game, recentDeaths, i);
 					} else {
 						game.nextEvent();
