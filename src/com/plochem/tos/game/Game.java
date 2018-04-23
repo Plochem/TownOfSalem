@@ -122,6 +122,9 @@ public class Game {
 		event = "Voting";
 		cd = new Countdown(30);
 		cd.start(plugin, this);
+		for(GamePlayer gp: arena.getAlivePlayers()){
+			gp.getRole().givePlayerList(gp);
+		}
 	}
 	
 //	private Role pickRandom() {

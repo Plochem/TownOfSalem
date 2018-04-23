@@ -31,5 +31,11 @@ public class Mafiaso extends Role implements Ability{
 		//TODO change method
 	}
 
+	@Override
+	public void givePlayerList(GamePlayer gp) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 }

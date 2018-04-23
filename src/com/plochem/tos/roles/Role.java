@@ -136,11 +136,13 @@ public class Role{
 	}
 
 	public void performAbility(String playerName, Game game) {
-
 	}
 
 	public void giveItems(GamePlayer gp) {
+	}
 
+	public void givePlayerList(GamePlayer gp) {
+		//TODO build player list
 	}
 	
 	

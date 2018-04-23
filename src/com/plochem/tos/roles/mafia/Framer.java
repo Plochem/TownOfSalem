@@ -25,4 +25,10 @@ public class Framer extends Role implements Ability{
 		
 		//TODO frame
 	}
+
+	@Override
+	public void givePlayerList(GamePlayer gp) {
+		// TODO Auto-generated method stub
+		
+	}
 }

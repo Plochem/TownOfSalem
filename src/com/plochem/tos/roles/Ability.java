@@ -5,5 +5,6 @@ import com.plochem.tos.game.GamePlayer;
 
 public interface Ability {
 	public void giveItems(GamePlayer gp);
+	public void givePlayerList(GamePlayer gp);
 	public void performAbility(String playerName, Game game);
 }

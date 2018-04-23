@@ -28,7 +28,7 @@ public class InventoryClick implements Listener{
 				e.setCancelled(true);
 				String selectedPlayerName = e.getCurrentItem().getItemMeta().getDisplayName();
 				if(selectedPlayerName.equals(p.getName())){ //TODO allow to click itself if doctor or vig/vet (whichever has the alerts)
-					p.sendMessage("§cYou cannot do that to yourself!"); //TODO fix message printing that you can kill yourself
+					p.sendMessage("§cYou cannot do that to yourself!");
 				} else {
 					for(GameItem items : gp.getItems()){
 						if(items.getGUI().equals(e.getClickedInventory())){ //check if player is clicking in the GUI designated for its role
