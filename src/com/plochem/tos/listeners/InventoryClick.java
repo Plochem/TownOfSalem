@@ -10,7 +10,7 @@ import com.plochem.tos.game.GamePlayer;
 import com.plochem.tos.game.items.GameItem;
 
 public class InventoryClick implements Listener{
-	Main plugin;
+	private Main plugin;
 	public InventoryClick(Main main) {
 		plugin = main;
 	}

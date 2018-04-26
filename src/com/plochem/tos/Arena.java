@@ -12,16 +12,16 @@ import com.plochem.tos.game.Game;
 import com.plochem.tos.game.GamePlayer;
 
 public class Arena {
-	Plugin plugin;
-	List<GamePlayer> alivePlayers = new ArrayList<>(); // only alive
-	List<GamePlayer> players = new ArrayList<GamePlayer>(); //only all.  helps build the player list
-	List<GamePlayer> deadPlayers = new ArrayList<GamePlayer>(); //only dead. helps build the player list
-	Location[] spawnpoints = new Location[15];
-	World world;
-	String name;
-	boolean hasStarted;
-	Game game;
-	Countdown cd;
+	private Plugin plugin;
+	private List<GamePlayer> alivePlayers = new ArrayList<>(); // only alive
+	private List<GamePlayer> players = new ArrayList<GamePlayer>(); //only all.  helps build the player list
+	private List<GamePlayer> deadPlayers = new ArrayList<GamePlayer>(); //only dead. helps build the player list
+	private Location[] spawnpoints = new Location[15];
+	private World world;
+	private String name;
+	private boolean hasStarted;
+	private Game game;
+	private Countdown cd;
 
 	public Arena(World world, String name, Location[] spawnpoints) {
 		this.world = world;

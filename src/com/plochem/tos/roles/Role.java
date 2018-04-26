@@ -4,14 +4,14 @@ import com.plochem.tos.game.Game;
 import com.plochem.tos.game.GamePlayer;
 
 public class Role{
-	String goal;
-	String name;
-	String coloredName;
-	String attributes;
-	String alignment;
-	boolean canPerformNightAbility;
-	int atkVal = 0;
-	int defVal = 0;
+	private String goal;
+	private String name;
+	private String coloredName;
+	private String attributes;
+	private String alignment;
+	private boolean canPerformNightAbility;
+	private int atkVal = 0;
+	private int defVal = 0;
 	
 
 //		if(role.equals("Framer") || role.equals("Godfather") || role.equals("Mafiaso")){

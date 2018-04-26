@@ -12,9 +12,9 @@ import com.plochem.tos.roles.mafia.Godfather;
 import com.plochem.tos.roles.mafia.Mafiaso;
 
 public class Countdown {
-	int time;
-	int countdown;
-	String type;
+	private int time;
+	private int countdown;
+	private String type;
 
 	public Countdown(int duration){
 		time = duration;

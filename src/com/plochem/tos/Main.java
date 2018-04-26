@@ -21,15 +21,15 @@ import com.plochem.tos.listeners.PlayerDataFile;
 import com.plochem.tos.listeners.PlayerInteract;
 
 public class Main extends JavaPlugin{
-	Main plugin;
+	private Main plugin;
 
-	File arenaFile;
-	YamlConfiguration arenaData;
+	private File arenaFile;
+	private YamlConfiguration arenaData;
 
-	String noArenasCreated = "§6[Town Of Salem] §cNo arenas have been created yet!";
-	public List<Arena> listOfArenas = new ArrayList<>();
-	Set<String> arenaList;
-	final String PREFIX = "§6[Town Of Salem] ";
+	private String noArenasCreated = "§6[Town Of Salem] §cNo arenas have been created yet!";
+	private List<Arena> listOfArenas = new ArrayList<>();
+	private Set<String> arenaList;
+	private final String PREFIX = "§6[Town Of Salem] ";
 
 	public Main() {
 

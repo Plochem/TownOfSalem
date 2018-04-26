@@ -13,14 +13,14 @@ import com.plochem.tos.Arena;
 import com.plochem.tos.game.GamePlayer;
 
 public class GameItem{
-	String onClickMsg;
-	ItemStack itemRep;
-	ItemMeta itemRepMeta;
-	String nameOfItem;
-	String menuName;
-	Inventory GUI;
-	ItemStack playerSkull = new ItemStack(Material.SKULL_ITEM);
-	SkullMeta playerSkullMeta = (SkullMeta) playerSkull.getItemMeta();
+	private String onClickMsg;
+	private ItemStack itemRep;
+	private ItemMeta itemRepMeta;
+	private String nameOfItem;
+	private String menuName;
+	private Inventory GUI;
+	private ItemStack playerSkull = new ItemStack(Material.SKULL_ITEM);
+	private SkullMeta playerSkullMeta = (SkullMeta) playerSkull.getItemMeta();
 	
 	/**
 	 * Updates the player list in the specified arena

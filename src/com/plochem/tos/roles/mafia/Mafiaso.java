@@ -9,7 +9,7 @@ import com.plochem.tos.roles.Ability;
 import com.plochem.tos.roles.Role;
 
 public class Mafiaso extends Role implements Ability{
-	GameItem mafiaChooser = new MafiaChooser();
+	private GameItem mafiaChooser = new MafiaChooser();
 	public Mafiaso(){
 		this.setName("Mafiaso");
 		this.setColoredName("§4§lMafiaso");
@@ -30,12 +30,5 @@ public class Mafiaso extends Role implements Ability{
 		game.addNewDeath(new Death(playerName, this));
 		//TODO change method
 	}
-
-	@Override
-	public void givePlayerList(GamePlayer gp) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }

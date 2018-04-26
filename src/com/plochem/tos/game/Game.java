@@ -16,19 +16,21 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import com.plochem.tos.Arena;
 import com.plochem.tos.Countdown;
+import com.plochem.tos.api.HoloAPI;
 import com.plochem.tos.roles.Role;
 import com.plochem.tos.roles.mafia.Framer;
 import com.plochem.tos.roles.mafia.Godfather;
 import com.plochem.tos.roles.mafia.Mafiaso;
 
 public class Game {
-	Plugin plugin;
-	Arena arena;
-	Role[] roles = {new Mafiaso(), new Framer(), new Godfather()};
-	List<Role> copyOfRoles;
-	String event;
-	Countdown cd;
-	List<Death> recentDeaths = new ArrayList<>();
+	private Plugin plugin;
+	private Arena arena;
+	private Role[] roles = {new Mafiaso(), new Framer(), new Godfather()};
+	@SuppressWarnings("unused")
+	private List<Role> copyOfRoles;
+	private String event;
+	private Countdown cd;
+	private List<Death> recentDeaths = new ArrayList<>();
 	
 	String mafiaKill;
 	
@@ -123,7 +125,9 @@ public class Game {
 		cd = new Countdown(30);
 		cd.start(plugin, this);
 		for(GamePlayer gp: arena.getAlivePlayers()){
-			gp.getRole().givePlayerList(gp);
+//			gp.getRole().givePlayerList(gp);
+//			gp.getPlayer().getName() + " - " + "place";
+
 		}
 	}
 	
